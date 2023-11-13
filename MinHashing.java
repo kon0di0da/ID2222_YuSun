@@ -64,8 +64,8 @@ public class MinHashing {
 
         // Example list of integer sets (hashed shingles)
         List<Set<Integer>> sets = new ArrayList<>();
-        sets.add(Set.of(1, 2, 3, 4, 5));
-        sets.add(Set.of(1,2,3,4,5));
+        sets.add(Set.of(1, 2, 3, 4, 5,16,17,100,25));
+        sets.add(Set.of(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15));
 //        sets.add(Set.of(2, 3, 5, 8, 9));
 
         // Specify the length of the minHash signatures

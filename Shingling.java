@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 // Class representing a document shingling
@@ -56,6 +57,40 @@ public class Shingling {
         }
         return result;
     }
+//    public Set<Integer> getUnion(List<Set<Integer>> setList){
+//        Set<Integer> union = new HashSet<>();
+//        for (Set<Integer> integers : setList) {
+//            union.addAll(integers);
+//        }
+//        return union;
+//    }
+
+//    public Integer[][] getShingledMatrix(List<Set<Integer>> setList){
+//        Set<Integer> union = getUnion(setList);
+//        Integer[][] result = new Integer[union.size()][setList.size()];
+//        int count = 0;
+//        for (Integer i : union) {
+//
+//            for (int i1 = 0; i1 < setList.size(); i1++) {
+//                if(setList.get(i1).contains(i)){
+//                    result[count][i1] = 1;
+//                }
+//                else{
+//                    result[count][i1] = 0;
+//                }
+//            }
+//            count++;
+//        }
+//        System.out.println(count);
+//        for (int i = 0; i < result.length; i++) {
+//            for (int i1 = 0; i1 < result[0].length; i1++) {
+//                System.out.print(result[i][i1]);
+//                System.out.print(" ");
+//            }
+//            System.out.println(" ");
+//        }
+//        return result;
+//    }
 
 
 

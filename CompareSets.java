@@ -1,6 +1,8 @@
 package LSH;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class CompareSets {
@@ -9,6 +11,7 @@ public class CompareSets {
         // Compute Jaccard similarity of two sets of hashed shingles
         int intersectionSize = computeIntersectionSize(set1, set2);
         int unionSize = computeUnionSize(set1, set2);
+
 
         // Jaccard Similarity = (Intersection Size) / (Union Size)
         return (double) intersectionSize / unionSize;
@@ -35,17 +38,65 @@ public class CompareSets {
         return union.size();
     }
 
-//    public static void main(String[] args) {
-//        // Example usage
-//        CompareSets compareSets = new CompareSets();
-//
-//        // Create two sets of hashed shingles
-//        Set<Integer> set1 = Set.of(1, 2, 3, 4, 5);
-//        Set<Integer> set2 = Set.of(3, 4, 5, 6, 7);
-//
-//        // Compute and print Jaccard similarity
-//        double jaccardSimilarity = compareSets.computeJaccardSimilarity(set1, set2);
-//        System.out.println("Jaccard Similarity: " + jaccardSimilarity);
-//    }
+    public Set<Integer> getUnion(List<Set<Integer>> setList){
+        Set<Integer> union = new HashSet<>();
+        for (Set<Integer> integers : setList) {
+            union.addAll(integers);
+        }
+        return union;
+    }
+
+    public Integer[][] getBooleanMatrix(List<Set<Integer>> setList){
+        Set<Integer> union = getUnion(setList);
+        Integer[][] result = new Integer[union.size()][setList.size()];
+        int count = 0;
+        for (Integer i : union) {
+
+            for (int i1 = 0; i1 < setList.size(); i1++) {
+                if(setList.get(i1).contains(i)){
+                    result[count][i1] = 1;
+                }
+                else{
+                    result[count][i1] = 0;
+                }
+            }
+            count++;
+        }
+//        System.out.println(count);
+//        for (int i = 0; i < result.length; i++) {
+//            for (int i1 = 0; i1 < result[0].length; i1++) {
+//                System.out.print(result[i][i1]);
+//                System.out.print(" ");
+//            }
+//            System.out.println(" ");
+//        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        // Example usage
+        CompareSets compareSets = new CompareSets();
+
+        // Create two sets of hashed shingles
+        Set<Integer> set1 = Set.of(1, 2, 3, 4, 5);
+        Set<Integer> set2 = Set.of(3, 4, 5, 6, 7);
+
+        List<Set<Integer>> setList = new ArrayList<>();
+        setList.add(set1);
+        setList.add(set2);
+        Integer[][] res = compareSets.getBooleanMatrix(setList);
+
+//        for (int i = 0; i < res.length; i++) {
+//            for (int i1 = 0; i1 < res[0].length; i1++) {
+//                System.out.print(res[i][i1]);
+//                System.out.print(" ");
+//            }
+//            System.out.println(" ");
+//        }
+
+        // Compute and print Jaccard similarity
+        double jaccardSimilarity = compareSets.computeJaccardSimilarity(set1, set2);
+        System.out.println("Jaccard Similarity: " + jaccardSimilarity);
+    }
 }
 

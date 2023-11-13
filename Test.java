@@ -8,6 +8,7 @@ public class Test {
         Set<Integer> shingles = new HashSet<>();
         Shingling shingling = new Shingling();
         shingles = shingling.getShingles("1.txt",2);
+
 //        System.out.println(shingles.size());
         for (Integer shingle : shingles) {
             System.out.println(shingle);
