@@ -78,13 +78,17 @@ public class CompareSets {
         CompareSets compareSets = new CompareSets();
 
         // Create two sets of hashed shingles
-        Set<Integer> set1 = Set.of(1, 2, 3, 4, 5);
-        Set<Integer> set2 = Set.of(3, 4, 5, 6, 7);
+        Set<Integer> shingles1 = new HashSet<>();
+        Set<Integer> shingles2 = new HashSet<>();
+        Shingling shingling = new Shingling();
+        shingles1 = shingling.getShingles("1.txt",4);
+        shingles2 = shingling.getShingles("2.txt",4);
 
-        List<Set<Integer>> setList = new ArrayList<>();
-        setList.add(set1);
-        setList.add(set2);
-        Integer[][] res = compareSets.getBooleanMatrix(setList);
+
+//        List<Set<Integer>> setList = new ArrayList<>();
+//        setList.add(shingles1);
+//        setList.add(shingles2);
+//        Integer[][] res = compareSets.getBooleanMatrix(setList);
 
 //        for (int i = 0; i < res.length; i++) {
 //            for (int i1 = 0; i1 < res[0].length; i1++) {
@@ -95,7 +99,7 @@ public class CompareSets {
 //        }
 
         // Compute and print Jaccard similarity
-        double jaccardSimilarity = compareSets.computeJaccardSimilarity(set1, set2);
+        double jaccardSimilarity = compareSets.computeJaccardSimilarity(shingles1, shingles2);
         System.out.println("Jaccard Similarity: " + jaccardSimilarity);
     }
 }

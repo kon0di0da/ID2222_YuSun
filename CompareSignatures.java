@@ -1,6 +1,7 @@
 package LSH;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,10 +35,16 @@ public class CompareSignatures {
 
         // Example minHash signatures (integer vectors)
         List<Set<Integer>> sets = new ArrayList<>();
-        sets.add(Set.of(1, 2, 3, 4, 5,6,100,19,23,24));
-        sets.add(Set.of(1,2,3,4,5,6,7,8,9,10,11,12));
+        Set<Integer> shingles1 = new HashSet<>();
+        Set<Integer> shingles2 = new HashSet<>();
+        Shingling shingling = new Shingling();
+        shingles1 = shingling.getShingles("1.txt",4);
+        shingles2 = shingling.getShingles("2.txt",4);
+
+        sets.add(shingles1);
+        sets.add(shingles2);
         MinHashing minHashing = new MinHashing();
-        List<List<Integer>> signatureMatrix = minHashing.buildMinHashSignature(sets, 3);
+        List<List<Integer>> signatureMatrix = minHashing.buildMinHashSignature(sets, 10);
         // Estimate and print the similarity
         double similarity = compareSignatures.estimateSimilarity(signatureMatrix.get(0),signatureMatrix.get(1));
         System.out.println("MinHash Signature Similarity: " + similarity);

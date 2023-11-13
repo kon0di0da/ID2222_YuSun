@@ -1,0 +1,68 @@
+The homework can be done in a group of 2 students.
+Task
+In this homework, you are to study, implement, and test the spectral graph clustering algorithm described in the paper "On Spectral Clustering: Analysis and an algorithm"Links to an external site. by Andrew Y. Ng, Michael I. Jordan, and Yair Weiss. You are to analyze two sample graphs using your implementation of the K-eigenvector algorithm.
+
+A real graph "example1.dat Download example1.dat" -- This data set was prepared by Ron Burt. He dug out the 1966 data collected by Coleman, Katz, and Menzel on medical innovation. They collected data from physicians in four towns in Illinois: Peoria, Bloomington, Quincy, and Galesburg.
+A synthetic graph "example2.dat Download example2.dat"
+You can choose any language to implement the algorithm. Using Matlab/Octave, the algorithm can be implemented in a few lines of code Matlab/Octave. By following this link, you can obtain a student license for Matlab as a KTH student. Find below a short Matlab tutorial for this homework.
+
+You should read the above paper first, as implementing the algorithm should be trivial. As a warm-up task, you should first compute the eigenvectors and eigenvalues of a set of graphs and find out how many communities these graphs have. You will find it trivial if you are already familiar with Matlab.
+
+Readings
+Lecture
+Cluster Multiple Eigenvector, i.e., K-eigenvector Algorithm (Ng et al.,’01Links to an external site.)
+Submission, Presentation, and Demonstration
+You upload your solution in a zip file to Canvas. To get a bonus, you should upload your solution before the deadline. Canvas records the submission time. A bonus will not be given if you miss the deadline. Your homework solution must include 
+
+Source code (with comments); 
+Report (in PDF) with a short description of your solution, and graph analysis.
+In case you work in Jupyter notebook, you can include the report contents there as well, in which case submission of a separate PDF would not be required.
+Please do not include the dataset files as part of your submission; instead, make sure there are clear instructions and reachable links for obtaining the dataset are included in your report.
+Within a week after the homework deadline, you present and demonstrate your homework on your laptop to a course instructor. A link to the time-slot pool will be provided under Syllabus to book a time slot for the presentation.
+
+Grading and Bonus Policy
+The grade for homework is pass/fail. If you submit your solution on time and it is accepted, you will get up to 3 bonus points on the ID2222 exam. Some homework assignments include an optional task for an extra bonus. The total bonus can be reduced for minor errors and inefficiency of your solution.  A bonus will not be given if you miss the deadline.
+Matlab Tutorial
+The graphs you will use for this homework are comma-separated edge lists.
+
+Importing comma-separated edge list in Matlab
+>> E = csvread(‘/..path../file.dat’)
+Converting Edge list to the adjacency matrix
+>> col1 = E(:,1);
+>> col2 = E(:,2);
+>> max_ids = max(max(col1,col2));
+>> As= sparse(col1, col2, 1, max_ids, max_ids); 
+>> A = full(As)
+Getting the eigenvalues
+>> [v,D] = eig(A)
+Sort eigenvalues
+>> sort(diag(D))
+Spectral Graphs Partitioning
+Fiedler Vector: The eigenvector corresponding to the second smallest eigenvalue of the Laplacian matrix, L, is called Fiedler Vector. If the graph has two modules, it bisects the graph into only two communities based on the sign of the corresponding vector entry.
+
+Example:
+Image_005.png
+
+Image_010.png
+
+ Image_006.png
+
+If we plot the sorted Fiedler Vector it the communities in the graphs will be clearly visible. For example, for a graph with 1000 nodes and two communities, the graph for a sorted Fiedler vector might look like this.
+
+Image_007.jpg
+
+What if there are more than two communities?
+Image_008.png
+
+              Sparsity Pattern                                                                   Sorted Fiedler Vector
+
+ For very large graphs, use the eigs function to find a few eigenvalues and eigenvectors of a matrix, i.e.,
+
+>> [V D] = eigs(L, 2, 'SA');
+What if there are nested clusters?
+Two basic approaches
+
+Recursive partitioning (Hagen et al.,' 91)
+Recursively apply partitioning algorithm in a hierarchical divisive manner.
+Disadvantages: Inefficient, unstable
+Cluster Multiple Eigenvector, i.e., K-eigenvector Algorithm (Ng et al.,’01Links to an external site.)
