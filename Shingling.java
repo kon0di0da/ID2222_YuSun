@@ -15,8 +15,9 @@ public class Shingling {
         // Return a set of hashed k-shingles
         // Use a HashSet to ensure uniqueness
         Set<String> shingles = new HashSet<>();
-        Set<Integer> intSet = new HashSet<>();
+        Set<Integer> intSet = new HashSet <>();
         String currentDirectory = "C:\\Users\\tianj\\Desktop\\Java_study\\untitled\\src\\LSH";
+//        String currentDirectory = ".";
         File file = new File(currentDirectory,document);
 
         if(file.exists()){
